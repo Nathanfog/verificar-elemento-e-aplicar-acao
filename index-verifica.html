@@ -1,0 +1,284 @@
+<div id="popup" class="hidden">
+    <div class="modal">
+	<article class="modal-container">
+		<header class="modal-container-header">
+			<h1 class="modal-container-title">
+				
+				RETIRADA LOJA BARBACENA
+			</h1>
+
+		</header>
+		<section class="modal-container-body rtf">
+			<h2>TEMOS PORTADOR PARA A LOJA DE BARBACENA,<br><strong> APENAS NAS QUINTAS-FEIRAS</h2>
+
+			<p>Pedidos realizados até quarta-feira, às 13h, serão enviados para a loja no dia seguinte, com retirada disponível a partir das 11h.</p>
+<br>
+			<p>Pedidos faturados após quarta-feira, às 13h, serão encaminhados na quinta-feira da semana seguinte.</p>
+<br>
+			<p>Se precisar de mais informações, entre em contato conosco pelo WhatsApp: <a id="numero-whatsapp" href="https://api.whatsapp.com/send?l=pt_br&phone=32999109880" target="_blank" > Clique aqui </a> ou envie uma mensagem para (32) 9910-9880.</p>
+
+		</section>
+		<footer class="modal-container-footer">
+                        <div class="horario-atd">
+                       <h4>Horário de atendimento:</h4>
+                      <p>Segunda a quinta-feira: 8h às 18h</p>
+                      <p>Sexta-feira: 8h às 17h</p>
+
+                       </div>
+			<button class="button is-primary" id="closePopup">Aceito as Condições de Retirada</button>
+		</footer>
+	</article>
+</div>
+</div>
+<script>
+try{
+var mutationObserver = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    
+    // pega todos os elemtos <label>
+    let labels = document.querySelectorAll('#co-shipping-method-form label');
+    let inputs = document.querySelectorAll('#co-shipping-method-form input');
+    
+
+    inputs.forEach(function(inputsElement) {
+
+      
+      let InputValue= inputsElement.value.trim();
+      console.log(InputValue);
+      
+      
+      if (InputValue.includes("matrix")) {
+        
+        bindClickToElement(inputsElement); 
+        mutationObserver.disconnect();
+      }
+
+    });
+
+
+
+    labels.forEach(function(labelElement) {
+      // pega todos os textos
+      let labelText = labelElement.textContent.trim();
+      
+      
+      // Verifica se tem o texto "RUA VIGÁRIO BRITO"
+      if (labelText.includes("RUA VIGÁRIO BRITO")) {
+        
+        bindClickToElement(labelElement); 
+        mutationObserver.disconnect();
+      }
+
+    });
+
+  });
+});
+
+mutationObserver.observe(document.documentElement, {
+  attributes: true,
+  characterData: true,
+  childList: true,
+  subtree: true,
+  attributeOldValue: true,
+  characterDataOldValue: true
+});
+}catch(e){
+mutationObserver.disconnect();
+
+}
+
+function bindClickToElement(element) {
+    var popup = document.getElementById('popup');
+    var closePopup = document.getElementById('closePopup');
+    
+    // evento de clique no elemento
+    element.addEventListener('click', function() {
+        popup.classList.remove('hidden'); // Mostra o popup
+    });
+
+    // Fecha o popup ao clicar no botão de fechar
+    closePopup.addEventListener('click', function() {
+        popup.classList.add('hidden'); // Oculta o popup
+    });
+}
+
+
+detectAndBindPopup();
+</script>
+
+<style>
+
+#numero-whatsapp{
+color: blue !important;
+
+}
+
+.hidden {
+    display: none;
+}
+
+.modal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 10000;
+    width: 90%;
+
+}
+
+.modal-container {
+	max-height: 90vh;
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #fff;
+	border-radius: 16px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+    box-shadow: 9px 9px 30px 0px;
+	
+	@media (max-width: 600px) {
+		width: 90%;
+	}
+}
+
+.modal-container-header {
+	padding: 12px 30px;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+	text-align: center;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+}
+
+.modal-container-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	line-height: 1;
+	font-weight: 700;
+	font-size: 1.125;
+	svg {
+		width: 32px;
+		height: 32px;
+		color: #750550;
+	}
+}
+
+.modal-container-body {
+	padding: 15px 32px 18px;
+	overflow-y: auto;
+ text-align: center;
+
+@media (max-width: 600px) {
+    padding: 4px 20px 7px;
+    overflow-y: auto;
+}
+}
+
+.modal-container-footer {
+    padding: 20px 12px;
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #ddd;
+    gap: 12px;
+    position: relative;
+    align-items: stretch;
+    flex-direction: column;
+	&:after {
+		content: "";
+		display: block;
+		position: absolute;
+		top: -51px;
+		left: 24px;
+		right: 24px;
+		height: 50px;
+		flex-shrink: 0;
+		background-image: linear-gradient(to top, rgba(#fff, 0.75), transparent);
+		pointer-events: none;
+	}
+}
+
+.button {
+	padding: 12px 20px;
+	border-radius: 8px;
+	background-color: transparent;
+	border: 0;
+	font-weight: 600;
+	cursor: pointer;
+	transition: 0.15s ease;
+
+	&.is-ghost {
+		&:hover,
+		&:focus {
+			background-color: #e3d0bf;
+		}
+	}
+
+	&.is-primary {
+		background-color: #e3d0bf;
+		color: #655b57;
+                font-weight: 700;
+		&:hover,
+		&:focus {
+			background-color: #d3c4b6;
+		}
+	}
+}
+
+.icon-button {
+	padding: 0;
+	border: 0;
+	background-color: transparent;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+	cursor: pointer;
+	border-radius: 8px;
+	transition: 0.15s ease;
+	svg {
+		width: 24px;
+		height: 24px;
+	}
+
+	&:hover,
+	&:focus {
+		background-color: #dfdad7;
+	}
+}
+
+h1.modal-container-title {
+    margin-bottom: 0px;
+}
+
+div#popup {
+    background: #82828280;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 10000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.horario-atd {
+    text-align: center;
+}
+.horario-atd h4 {
+    margin-bottom: 0px !important;
+}
+
+
+</style>
